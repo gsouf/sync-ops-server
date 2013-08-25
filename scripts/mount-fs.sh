@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# TODO : Mount point and origin
-mount -o loop /tmp/test-disk /mnt/test/
+# TODO : Check params
+mount -o loop $1 $2
