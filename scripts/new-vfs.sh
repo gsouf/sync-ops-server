@@ -4,6 +4,7 @@
 
 # $1 : location of the device
 # $2 : size of the disk
+# $3 : owner of the repo
 
 ## CHECK FOR ROOT
 #
@@ -23,6 +24,7 @@ fi
 MNT=$(mktemp -d /tmp/sync-ops.mnt.XXXXXXXXXX) || { echo "Failed to create tmp mount dir"; exit 1; }
 
 NEWFILE=$1
+USER=$3
 
 # TODO : simplify count ? (add bs ?)
 dd if=/dev/zero of=$NEWFILE count=$2
@@ -35,12 +37,16 @@ mount $NEWFILE $MNT
 
 mkdir $MNT/bin
 mkdir $MNT/lib
+mkdir $MNT/lib64
 
 cp /bin/bash $MNT/bin/bash
 cp /usr/bin/rsync $MNT/bin/rsync
 
-ldd /bin/bash | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp '{}' $MNT/lib/
-ldd /usr/bin/rsync | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp '{}' $MNT/lib/
+ldd /bin/bash | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
+ldd /usr/bin/rsync | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
+
+mkdir $MNT/inbox
+chown "$USER":"$USER" $MNT/inbox
 
 umount $MNT
 rmdir $MNT

@@ -2,4 +2,3 @@ Match User {{username}}
     ChrootDirectory {{jail}}
     AllowTCPForwarding no
     X11Forwarding no
-    ForceCommand internal-sftp

@@ -52,7 +52,7 @@ fi
 
 # TODO size
 if [ ! -f "$VDEVICE" ] ; then
-    bash $SCRIPT_DIR/new-vfs.sh $VDEVICE 20480
+    bash $SCRIPT_DIR/new-vfs.sh $VDEVICE 20480 $USER
     echo "Virtual FS created"
 fi
 
