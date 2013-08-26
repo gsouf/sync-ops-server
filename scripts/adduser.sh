@@ -18,7 +18,7 @@ USER="bobito"
 
 
 # TODO
-JAIL="/tmp/jail"
+JAIL="/var/sync-ops/jails/$USER"
 
 
 # TODO
@@ -38,6 +38,11 @@ ALLOWED_ADDR="*"
 # TODO check if user exists
 # TODO unix user creation if not exists
 
+
+
+if [ ! -d "$JAIL" ] ; then
+    mkdir -p $JAIL
+fi
 
 if [ ! -f "$ETC_DIR/users.d/$USER" ] ; then
     cat "$SCRIPT_DIR/res/user-conf.model" | sed -e "s@{{jail}}@$JAIL@" -e "s@{{virtual-device}}@$VDEVICE@" -e "s@{{address}}@$ALLOWED_ADDR@"  > "$ETC_DIR/users.d/$USER"

@@ -110,6 +110,14 @@ if [ ! -d "/var/sync-ops/devices" ]; then
   echo /var/sync-ops/devices created
 fi
 
+# create the jail directory
+#
+if [ ! -d "/var/sync-ops/jails" ]; then
+  mkdir -p "/var/sync-ops/jails"
+  echo /var/sync-ops/jails created
+fi
+
+
 echo ""
 echo "sync-ops ssh was installed in addition of the default ssh"
 echo "For more security we recommend you to allow"
