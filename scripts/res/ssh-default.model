@@ -86,6 +86,4 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
-DenyUsers *
-
 PidFile /var/run/sync-ops-sshd.pid
