@@ -42,8 +42,11 @@ mkdir $MNT/lib64
 cp /bin/bash $MNT/bin/bash
 cp /usr/bin/rsync $MNT/bin/rsync
 
-ldd /bin/bash | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
-ldd /usr/bin/rsync | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
+ldd /bin/bash | grep "/lib/" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
+ldd /usr/bin/rsync | grep "/lib/" | awk '{print $3}' | xargs -I '{}' cp --parents '{}' $MNT/
+
+ldd /bin/bash | grep "/lib64/" | awk '{print $1}' | xargs -I '{}' cp --parents '{}' $MNT/
+ldd /usr/bin/rsync | grep "/lib64/" | awk '{print $1}' | xargs -I '{}' cp --parents '{}' $MNT/
 
 mkdir $MNT/inbox
 chown "$USER":"$USER" $MNT/inbox
