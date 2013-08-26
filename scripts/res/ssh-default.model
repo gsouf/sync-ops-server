@@ -88,4 +88,4 @@ UsePAM yes
 
 DenyUsers *
 
-
+PidFile /var/run/sync-ops-sshd.pid

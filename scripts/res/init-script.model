@@ -34,7 +34,7 @@ run_by_init() {
 }
 
 check_for_no_start() {
-    # forget it if we're trying to start, and /etc/ssh/sshd_not_to_be_run exists
+    # forget it if we're trying to start, and /etc/sync-ops-ssh/sshd_not_to_be_run exists
     if [ -e {{etc_dir}}/sshd_not_to_be_run ]; then
 	if [ "$1" = log_end_msg ]; then
 	    log_end_msg 0 || true
@@ -60,7 +60,7 @@ check_dev_null() {
 
 check_privsep_dir() {
     # Create the PrivSep empty dir if necessary
-    if [ ! -d /var/run/sshd ]; then
+    if [ ! -d /var/run/sync-ops-sshd ]; then
 	mkdir /var/run/sync-ops-sshd
 	chmod 0755 /var/run/sync-ops-sshd
     fi
