@@ -20,8 +20,7 @@ if [ ! -f /usr/bin/rsync ] ; then
 fi
 
 
-MNT=$(mktemp /tmp/sync-ops.mnt.XXXXXXXXXX) || { echo "Failed to create tmp file"; exit 1; }
-mkdir $MNT
+MNT=$(mktemp -d /tmp/sync-ops.mnt.XXXXXXXXXX) || { echo "Failed to create tmp mount dir"; exit 1; }
 
 NEWFILE=$1
 
